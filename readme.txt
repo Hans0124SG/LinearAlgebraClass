@@ -1,4 +1,2 @@
-Git is a distributed version control system.
-Git is free software distributed under the GPL.
-Git has a mutable index called stage.
-Stupid boss
+This is my first GitHub repo.
+I use this to practice my GitHub skills, as well as storing my codes for Udacity Linear Algebra course.
