@@ -1,12 +1,10 @@
 from Vector import *
 
-a = Vector([8.218, -9.341])
-b = Vector([-1.129, 2.111])
+a = Vector([-5.955, -4.904, -1.874])
+b = Vector([-4.496, -8.755, 7.103])
 
 print(a + b)
 
 print(a * 7.41)
 
-a = Vector([0,0])
-print(a.get_unit_vector())
-
+print(a.dot_product(b))

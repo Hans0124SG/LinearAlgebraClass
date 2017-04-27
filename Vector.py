@@ -1,3 +1,5 @@
+import
+
 class Vector:
     def __init__(self, coordinates):
         try:
@@ -43,3 +45,10 @@ class Vector:
             return self * (1.0 / magnitude)
         except ZeroDivisionError:
             raise ZeroDivisionError("Zero vector has no unit vector")
+
+    def dot_product(self, v):
+        return sum(list(map(lambda x, y: x * y, self.coordinates, v.coordinates)))
+
+    def get_angle(self, v):
+        cos = self.dot_product(v) / (self.get_magnitude() * v.get_magnitude())
+
