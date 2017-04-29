@@ -1,10 +1,11 @@
 from Vector import *
 
-a = Vector([-5.955, -4.904, -1.874])
-b = Vector([-4.496, -8.755, 7.103])
+a = Vector([7.35, 0.221, 5.188])
+b = Vector([2.751, 8.259, 3.985])
 
-print(a + b)
+print(a.get_angle(b))
 
-print(a * 7.41)
+c = Vector([7.887, 4.138])
+d = Vector([-8.802, 6.776])
 
-print(a.dot_product(b))
+print(c.dot_product(d))

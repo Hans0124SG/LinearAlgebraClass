@@ -1,11 +1,15 @@
-import
+import math
+from decimal import Decimal, getcontext
+
+getcontext().prec = 30
+
 
 class Vector:
     def __init__(self, coordinates):
         try:
             if not coordinates:
                 raise ValueError
-            self.coordinates = tuple(coordinates)
+            self.coordinates = tuple([Decimal(x) for x in coordinates])
             self.dimension = len(coordinates)
 
         except ValueError:
@@ -34,15 +38,15 @@ class Vector:
             raise IndexError('The two vectors have different dimensions')
 
     def __mul__(self, scalar):
-        return Vector([scalar * x for x in self.coordinates])
+        return Vector([Decimal(scalar) * x for x in self.coordinates])
 
     def get_magnitude(self):
-        return sum([x ** 2 for x in self.coordinates]) ** 0.5
+        return sum([x ** Decimal('2') for x in self.coordinates]) ** Decimal('0.5')
 
     def get_unit_vector(self):
         try:
             magnitude = self.get_magnitude()
-            return self * (1.0 / magnitude)
+            return self * (Decimal('1.0') / magnitude)
         except ZeroDivisionError:
             raise ZeroDivisionError("Zero vector has no unit vector")
 
@@ -50,5 +54,9 @@ class Vector:
         return sum(list(map(lambda x, y: x * y, self.coordinates, v.coordinates)))
 
     def get_angle(self, v):
-        cos = self.dot_product(v) / (self.get_magnitude() * v.get_magnitude())
+        try:
+            cos = self.dot_product(v) / (self.get_magnitude() * v.get_magnitude())
+            return math.acos(cos), math.acos(cos) / math.pi * 180
+        except ZeroDivisionError:
+            raise ZeroDivisionError("Zero vector has no unit vector")
 
