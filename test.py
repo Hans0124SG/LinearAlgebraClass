@@ -1,21 +1,22 @@
 from Vector import *
 
-a = Vector([-7.579, -7.88])
-b = Vector([22.737, 23.64])
+a = Vector([3.039, 1.879])
+b = Vector([0.825, 2.036])
 
-print(a.is_parallel(b))
+print(Vector.decompose(a, b)[0])
 
-c = Vector([2.029, 9.97, 4.172])
-d = Vector([-9.231, -6.639, -7.245])
+c = Vector([-9.88, -3.264, -8.159])
+d = Vector([-2.155, -9.353, -9.473])
 
-print(c.is_parallel(d))
+print(Vector.decompose(c, d)[1])
+#
+e = Vector([3.009, -6.172, 3.692, -2.51])
+f = Vector([6.404, -9.144, 2.759, 8.718])
 
-e = Vector([-2.328, -7.284, -1.214])
-f = Vector([-1.821, 1.072, -2.94])
+print(Vector.decompose(e, f, output=True))
 
-print(e.is_orthogonal(f))
+# g = Vector([2.118, 4.827])
+# h= Vector([0, 0])
+#
+# print(g.is_parallel(h))
 
-g = Vector([2.118, 4.827])
-h= Vector([0, 0])
-
-print(g.is_parallel(h))

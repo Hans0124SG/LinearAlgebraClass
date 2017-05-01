@@ -3,7 +3,6 @@ from decimal import Decimal, getcontext
 
 getcontext().prec = 30
 
-
 class Vector:
     def __init__(self, coordinates):
         try:
@@ -19,7 +18,7 @@ class Vector:
             raise TypeError('The coordinates must be an iterable')
 
     def __str__(self):
-        return 'Vector: {}'.format(self.coordinates)
+        return 'Vector: {}'.format([str(x) for x in self.coordinates])
 
     def __eq__(self, v):
         return self.coordinates == v.coordinates
@@ -37,7 +36,7 @@ class Vector:
         except IndexError:
             raise IndexError('The two vectors have different dimensions')
 
-    def __mul__(self, scalar):
+    def multiply(self, scalar):
         return Vector([Decimal(scalar) * x for x in self.coordinates])
 
     def get_magnitude(self):
@@ -46,7 +45,7 @@ class Vector:
     def get_unit_vector(self):
         try:
             magnitude = self.get_magnitude()
-            return self * (Decimal('1.0') / magnitude)
+            return self.multiply(Decimal('1.0') / magnitude)
         except ZeroDivisionError:
             raise ZeroDivisionError("Zero vector has no unit vector")
 
@@ -64,10 +63,23 @@ class Vector:
             return math.acos(cos), math.acos(cos) / math.pi * 180.0
 
     def is_orthogonal(self, v, tolerance=1.0E-09):
-        print(self.dot_product(v))
+        # print(self.dot_product(v))
         return self.dot_product(v) < tolerance
 
     def is_parallel(self, v):
         return self.get_angle(v)[1] == 0.0 or self.get_angle(v)[1] == 180.0
+
+    def decompose(self, direction, output=False):
+        try:
+            uni = direction.get_unit_vector()
+            adjacent = uni.multiply(self.dot_product(uni))
+            opposite = self - adjacent
+            if output:
+                print(adjacent)
+                print(opposite)
+            return adjacent, opposite
+        except Exception as e:
+            raise e
+
 
 
