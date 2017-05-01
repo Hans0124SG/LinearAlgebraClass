@@ -53,10 +53,21 @@ class Vector:
     def dot_product(self, v):
         return sum(list(map(lambda x, y: x * y, self.coordinates, v.coordinates)))
 
+    def is_zero(self, tolerance=1.0E-09):
+        return self.get_magnitude() < tolerance
+
     def get_angle(self, v):
-        try:
+        if self.is_zero() or v.is_zero():
+            return 0.0, 0.0
+        else:
             cos = self.dot_product(v) / (self.get_magnitude() * v.get_magnitude())
-            return math.acos(cos), math.acos(cos) / math.pi * 180
-        except ZeroDivisionError:
-            raise ZeroDivisionError("Zero vector has no unit vector")
+            return math.acos(cos), math.acos(cos) / math.pi * 180.0
+
+    def is_orthogonal(self, v, tolerance=1.0E-09):
+        print(self.dot_product(v))
+        return self.dot_product(v) < tolerance
+
+    def is_parallel(self, v):
+        return self.get_angle(v)[1] == 0.0 or self.get_angle(v)[1] == 180.0
+
 
