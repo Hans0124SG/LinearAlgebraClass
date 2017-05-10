@@ -81,5 +81,16 @@ class Vector:
         except Exception as e:
             raise e
 
+    def cross_product(self, v):
+
+        if len(self.coordinates) == 3 and len(v.coordinates) == 3:
+            x_1, y_1, z_1 = self.coordinates
+            x_2, y_2, z_2 = v.coordinates
+            return Vector(
+                (y_1 * z_2 - z_1 * y_2, -x_1 * z_2 + z_1 * x_2, x_1 * y_2 - y_1 * x_2))
+        else:
+            return "Not 3-dimension vector"
+
+
 
 
