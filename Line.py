@@ -23,6 +23,8 @@ class Line(object):
 
         self.set_basepoint()
 
+
+    # Basepoint should be a point on the line
     def set_basepoint(self):
         try:
             n = self.normal_vector
@@ -93,14 +95,20 @@ class Line(object):
                 return k
         raise Exception(Line.NO_NONZERO_ELTS_FOUND_MSG)
 
-    def is_parallel(self, l):
-        return Vector(self.normal_vector).is_parallel(Vector(l.normal_vector))
-
-    # def is_equal(self, l):
-    #     if self.is_parallel(l):
-    #
-    #     else:
-    #         return False
+    def find_intersection(self, l):
+        if Vector(self.normal_vector).is_parallel(Vector(l.normal_vector)):
+            tempVec = l.basepoint - self.basepoint;
+            if Vector(self.normal_vector).is_orthogonal(tempVec):
+                return self
+            else:
+                return None
+        else:
+            a, b = self.normal_vector
+            c, d = l.normal_vector
+            k1 = float(self.constant_term)
+            k2 = float(l.constant_term)
+            intersect = Vector(((d*k1-b*k2)/(a*d - b*c), (a*k2-c*k1)/(a*d - b*c)))
+            return intersect
 
 
 class MyDecimal(Decimal):

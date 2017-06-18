@@ -64,7 +64,7 @@ class Vector:
 
     def is_orthogonal(self, v, tolerance=1.0E-09):
         # print(self.dot_product(v))
-        return self.dot_product(v) < tolerance
+        return abs(self.dot_product(v)) < tolerance
 
     def is_parallel(self, v):
         return self.get_angle(v)[1] == 0.0 or self.get_angle(v)[1] == 180.0
