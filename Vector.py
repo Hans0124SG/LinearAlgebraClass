@@ -3,6 +3,7 @@ from decimal import Decimal, getcontext
 
 getcontext().prec = 30
 
+
 class Vector:
     def __init__(self, coordinates):
         try:
