@@ -94,16 +94,16 @@ class Plane(object):
         raise Exception(Plane.NO_NONZERO_ELTS_FOUND_MSG)
 
     def is_parallel(self, p):
-        if Vector(self.normal_vector).is_parallel(Vector(p.normal_vector)):
+        if self.normal_vector.is_parallel(p.normal_vector):
             vec = p.basepoint - self.basepoint
-            return not vec.is_orthogonal(Vector(self.normal_vector))
+            return not vec.is_orthogonal(self.normal_vector)
         else:
             return False
 
-    def is_equal(self, p):
-        if Vector(self.normal_vector).is_parallel(Vector(p.normal_vector)):
+    def __eq__(self, p):
+        if self.normal_vector.is_parallel(p.normal_vector):
             vec = p.basepoint - self.basepoint
-            return vec.is_orthogonal(Vector(self.normal_vector))
+            return vec.is_orthogonal(self.normal_vector)
         else:
             return False
 
