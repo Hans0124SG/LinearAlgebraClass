@@ -9,7 +9,7 @@ class Vector:
         try:
             if not coordinates:
                 raise ValueError
-            self.coordinates = tuple([Decimal(x) for x in coordinates])
+            self.coordinates = [Decimal(x) for x in coordinates]
             self.dimension = len(coordinates)
 
         except ValueError:
@@ -36,6 +36,15 @@ class Vector:
             return Vector(list(map(lambda x, y: x - y, self.coordinates, v.coordinates)))
         except IndexError:
             raise IndexError('The two vectors have different dimensions')
+
+    def __iter__(self):
+        return iter(self.coordinates)
+
+    def __getitem__(self, index):
+        return self.coordinates[index]
+
+    def __setitem__(self, index, value):
+        self.coordinates[index] = value
 
     def multiply(self, scalar):
         return Vector([Decimal(scalar) * x for x in self.coordinates])

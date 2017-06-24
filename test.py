@@ -3,6 +3,7 @@
 # b = Vector([0.825, 2.036])
 #
 # print(Vector.decompose(a, b)[0])
+
 from Plane import Plane
 
 plane1 = Plane(normal_vector=[-0.412, 3.806, 0.728], constant_term=-3.46)
